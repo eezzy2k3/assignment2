@@ -4,6 +4,7 @@ const { append } = require("express/lib/response")
 const connectDb = require("./config/config")
 const userrouter = require("./src/router/userrouter")
 const productrouter = require("./src/router/productrouter")
+const customerrouter = require("./src/router/customerroute")
 
 const app = express()
 app.use(express.urlencoded({extended:false}))
@@ -14,7 +15,7 @@ connectDb()
 
 app.use("/api",userrouter)
 app.use("/api",productrouter)
-
+app.use("/api",customerrouter)
 
 
 

@@ -1,39 +1,47 @@
 const mongoose = require("mongoose")
 
 
-const productSchema = new mongoose.Schema({
-    productName:{
+const customerSchema = new mongoose.Schema({
+    firstName:{
         type:String,
         required:true,
         trim:true
     },
-    storeName:{
+    lastName:{
         type:String,
         required:true,
         trim:true
     },
-    price:{
+    email:{
+        type:String,
+        required:true,
+        trim:true
+    },
+   
+    phoneNumber:{
         type:Number,
         required:true,
         trim:true
     },
-    quantity:{
-        type:Number,
-        required:true,
-        trim:true
-    },
-    description:{
+    password:{
         type:String,
         required:true,
         trim:true
     },
-    userid:[{type:mongoose.Schema.Types.ObjectId,ref:"User"}],
-
+    deliveryaddress:{
+        type:String,
+        required:true,
+        trim:true
+    },
+    refreshtoken:{
+        type:String
+    },
+    
 },{timestamps:true})
 
 
+const Customer = new mongoose.model("Customer",customerSchema)
 
 
-const Product = new mongoose.model("Product",productSchema)
 
-module.exports = {Product,productSchema}
+module.exports = Customer

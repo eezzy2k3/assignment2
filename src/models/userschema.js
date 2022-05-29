@@ -32,16 +32,15 @@ const userSchema = new mongoose.Schema({
         required:true,
         trim:true
     },
-    product:productSchema
+    refreshtoken:{
+        type:String
+    },
+    
 },{timestamps:true})
 
 
 const User = new mongoose.model("User",userSchema)
 
-// const validateUser =(User)=>{
-//    
-//         return schema.validate(User)    
-// }
 
 
 module.exports = User

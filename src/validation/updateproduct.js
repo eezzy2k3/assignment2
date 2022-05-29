@@ -1,15 +1,15 @@
 const Joi = require('joi')
 
 const validation = Joi.object({
-            productName:Joi.string().required(),
-            storeName:Joi.string().required(),
-            price:Joi.number().required(),
-            quantity:Joi.number().integer().required(),
-            description:Joi.string().required(),
+            productName:Joi.string(),
+            storeName:Joi.string(),
+            price:Joi.number(),
+            quantity:Joi.number().integer(),
+            description:Joi.string(),
            
         })
 
-        const productvalidation = async(req,res,next)=>{
+        const updateproductvalidation = async(req,res,next)=>{
             const payload = {
                 productName:req.body.productName,
                 storeName:req.body.storeName,
@@ -27,4 +27,4 @@ const validation = Joi.object({
             
         }
 
-        module.exports = productvalidation
+        module.exports = updateproductvalidation

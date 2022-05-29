@@ -1,5 +1,6 @@
-const {register,login,getall,getone,update,delet} = require("../controller/usercontroller")
+const {register,login,getall,getone,update,delet,generatedRefreshToken,changepassword} = require("../controller/usercontroller")
 const uservalidation = require ("../validation/uservalidation")
+const authorizeUser = require("../middlewares/authorize")
 const express = require("express")
 const router = express.Router()
 
@@ -8,9 +9,12 @@ const router = express.Router()
 router.post("/register",uservalidation,register)
 router.post("/login",login)
 router.get("/getalluser",getall)
-router.get("/getoneuser/:id",getone)
-router.put("/updateuser/:id",update)
-router.delete("/deleteuser/:id",delet)
+router.get("/getoneuser",authorizeUser,getone)
+router.put("/updateuser/",authorizeUser,update)
+router.delete("/deleteuser/",authorizeUser,delet)
+router.get("/refreshtoken",generatedRefreshToken)
+router.post("/changeuserpassword",authorizeUser,changepassword)
+
 
 
 

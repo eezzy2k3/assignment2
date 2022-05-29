@@ -21,7 +21,7 @@ const validation = Joi.object({
             }
            const{error} = validation.validate(payload)
                 if(error){
-                    res.status(406).json({success:false,msg:error})
+                    res.status(406).json({success:false,msg:error.details[0].message})
                 }else{
                     next()
                 }
