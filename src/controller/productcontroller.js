@@ -1,13 +1,15 @@
 const User = require("../models/userschema")
 const {Product} = require("../models/productschema")
 const jwt = require("jsonwebtoken")
+const fs = require("fs")
+const path = require("path")
+const cloudinary = require("../utils/cloudinary")
 
 
 const createProduct = async(req,res)=>{
     try{
         const {productName,storeName,price,quantity,description} = req.body
         const {id} = req.user
-
         const newproduct = await new Product({productName,storeName,price,quantity,description,userid:id})
         await newproduct.save()
         res.status(200).json({suucess:true,msg:"Product successfull created",data:newproduct})
@@ -86,8 +88,53 @@ const delet = async(req,res)=>{
     }
 }
 
+const uploadImage = async (req, res) => {
+    try{
+        const {id} = req.user
+    const pid = req.params.id
+    
+    const uploader = async (path) => await cloudinary.uploads(path , 'productImage')
+    let url=[]
+ 
+    const file = req.file
+    
+ 
+    const {path} = file
 
-module.exports ={createProduct,getall,getone,update,delet,getalluserproduct} 
+    
+    const newPath = await uploader(path)
+    
+    url = newPath.url
+    
+
+ 
+    fs.unlinkSync(path)
+    
+              
+
+    let product = await Product.findOne({userid:id,_id:pid})
+ 
+    product.productImage =  url.toString()
+ 
+    await product.save()
+ 
+    res.status(200).json({
+     success: true,
+     msg: "successfully uploaded an image for the product",
+     data: product
+ })
+ 
+    }catch(error){
+        res.status(404).json({success:false,msg:error})
+    }
+
+    
+ }
+ 
+
+
+
+module.exports ={createProduct,getall,getone,update,delet,getalluserproduct,uploadImage} 
 
 
 

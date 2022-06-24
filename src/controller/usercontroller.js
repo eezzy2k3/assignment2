@@ -42,8 +42,8 @@ const login =async(req,res)=>{
         if(!user)  return res.status(404).json({success:false,msg:"user does not exist"})
         const validpassword =await bcrypt.compare(password,user.password)
         if(!validpassword) return res.status(404).json({success:false,msg:"wrong username or password"})
-        const accesstoken = await jwt.sign({id:user._id,email:user.email},process.env.SECRET,{expiresIn:"1d"})
-        const refreshtoken = await jwt.sign({id:user._id,email:user.email},process.env.REFRESH_TOKEN,{expiresIn:"1d"})
+        const accesstoken = await jwt.sign({id:user._id,email:user.email},process.env.SECRET,{expiresIn:"40d"})
+        const refreshtoken = await jwt.sign({id:user._id,email:user.email},process.env.REFRESH_TOKEN,{expiresIn:"40d"})
         user.refrsehtoken = refreshtoken
         await user.save()
         res.status(200).json({

@@ -7,7 +7,7 @@ const router = express.Router()
 
 
 router.post("/register",uservalidation,register)
-router.post("/login",login)
+router.post("/loginuser",login)
 router.get("/getalluser",getall)
 router.get("/getoneuser",authorizeUser,getone)
 router.put("/updateuser/",authorizeUser,update)
