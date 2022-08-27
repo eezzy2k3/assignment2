@@ -17,9 +17,10 @@ Passwords must be hashed
 Passwords must not be less than 6 characters
 Emails must be in the correct email format 
 All User fields are required
+- A user can only modify/delete the product they created
 - complete cart functionality
 
-- Implement A Login System for Users
-- Handled Validations with the JOI
+- Implemented Login System for Users
+- Handled Validations with JOI
 	
-- Used the MVC design pattern. I
+- Used the MVC design pattern. 
